@@ -1,0 +1,74 @@
+joint_limits:
+  # 右臂关节限位（匹配RM65实物参数）
+  arm1_joint1:
+    has_velocity_limits: true
+    max_velocity: 1.57  # 90°/s
+    has_acceleration_limits: true
+    max_acceleration: 3.14  # 180°/s²
+  arm1_joint2:
+    has_velocity_limits: true
+    max_velocity: 1.57
+    has_acceleration_limits: true
+    max_acceleration: 3.14
+  arm1_joint3:
+    has_velocity_limits: true
+    max_velocity: 1.57
+    has_acceleration_limits: true
+    max_acceleration: 3.14
+  arm1_joint4:
+    has_velocity_limits: true
+    max_velocity: 1.57
+    has_acceleration_limits: true
+    max_acceleration: 3.14
+  arm1_joint5:
+    has_velocity_limits: true
+    max_velocity: 1.57
+    has_acceleration_limits: true
+    max_acceleration: 3.14
+  arm1_joint6:
+    has_velocity_limits: true
+    max_velocity: 1.57
+    has_acceleration_limits: true
+    max_acceleration: 3.14
+  # 左臂关节限位（与右臂一致）
+  arm2_joint1:
+    has_velocity_limits: true
+    max_velocity: 1.57
+    has_acceleration_limits: true
+    max_acceleration: 3.14
+  arm2_joint2:
+    has_velocity_limits: true
+    max_velocity: 1.57
+    has_acceleration_limits: true
+    max_acceleration: 3.14
+  arm2_joint3:
+    has_velocity_limits: true
+    max_velocity: 1.57
+    has_acceleration_limits: true
+    max_acceleration: 3.14
+  arm2_joint4:
+    has_velocity_limits: true
+    max_velocity: 1.57
+    has_acceleration_limits: true
+    max_acceleration: 3.14
+  arm2_joint5:
+    has_velocity_limits: true
+    max_velocity: 1.57
+    has_acceleration_limits: true
+    max_acceleration: 3.14
+  arm2_joint6:
+    has_velocity_limits: true
+    max_velocity: 1.57
+    has_acceleration_limits: true
+    max_acceleration: 3.14
+  # 机械爪限位（适配EG2-4C2实物）
+  arm1_4C2_Joint1:
+    has_velocity_limits: true
+    max_velocity: 0.5  # 低速避免夹爪冲击
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+  arm2_4C2_Joint1:
+    has_velocity_limits: true
+    max_velocity: 0.5
+    has_acceleration_limits: true
+    max_acceleration: 1.0

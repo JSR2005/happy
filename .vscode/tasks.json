@@ -1,0 +1,96 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "ROS2: Build Current Package",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "-c",
+                "cd ${workspaceFolder} && source /opt/ros/humble/setup.bash && colcon build --packages-select vision_module --symlink-install"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "ROS2: Build All",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "-c",
+                "cd ${workspaceFolder} && source /opt/ros/humble/setup.bash && colcon build --symlink-install"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "ROS2: Source Environment",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "-c",
+                "echo 'source /opt/ros/humble/setup.bash && source ${workspaceFolder}/install/setup.bash' >> ~/.bashrc && source ~/.bashrc"
+            ],
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "ROS2: Launch YOLOv8 Detector",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "-c",
+                "source /opt/ros/humble/setup.bash && source ${workspaceFolder}/install/setup.bash && ros2 launch vision_module yolo_detector.launch.py"
+            ],
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new"
+            },
+            "isBackground": false
+        },
+        {
+            "label": "ROS2: Launch RealSense Camera",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "-c",
+                "source /opt/ros/humble/setup.bash && ros2 launch realsense2_camera rs_launch.py"
+            ],
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new"
+            },
+            "isBackground": false
+        }
+    ]
+}

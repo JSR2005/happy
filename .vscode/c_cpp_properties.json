@@ -1,0 +1,33 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/opt/ros/humble/include/**",
+                "/usr/include/opencv4",
+                "/usr/include/c++/11",
+                "/usr/include/x86_64-linux-gnu",
+                "${workspaceFolder}/install/vision_interfaces/include/vision_interfaces",
+                "${workspaceFolder}/install/rm_ros_interfaces/include/rm_ros_interfaces"
+            ],
+            "defines": [
+                "_DEFAULT_SOURCE",
+                "__cplusplus=201703"
+            ],
+            "compilerPath": "/usr/bin/g++",
+            "cStandard": "c17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "linux-gcc-x64",
+            "browse": {
+                "path": [
+                    "${workspaceFolder}",
+                    "/opt/ros/humble/include",
+                    "/usr/include/opencv4",
+                    "/usr/include"
+                ]
+            }
+        }
+    ],
+    "version": 4
+}

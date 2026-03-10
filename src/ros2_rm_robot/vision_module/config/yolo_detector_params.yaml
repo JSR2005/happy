@@ -1,0 +1,21 @@
+yolo_detector_node:
+  ros__parameters:
+    # 模型路径 - 需要下载 YOLOv8 模型
+    model_path: "/home/jsr/models/yolov8m.onnx"
+    
+    # 置信度阈值 (0-1)
+    confidence_threshold: 0.5
+    
+    # NMS 非极大值抑制阈值
+    nms_threshold: 0.4
+    
+    # 输入图像大小 (YOLOv8 标准大小)
+    input_size: 640
+    
+    # 是否使用 GPU 加速（需要 CUDA）
+    use_gpu: false
+    
+    # ROS2 话题配置
+    image_topic: "/camera/color/image_raw"
+    detection_topic: "/detection_result"
+    debug_image_topic: "/detection_debug_image"

@@ -1,0 +1,4 @@
+geometry_msgs/PoseStamped pose
+float32 approach_distance
+float32 gripper_width
+string gripper_type

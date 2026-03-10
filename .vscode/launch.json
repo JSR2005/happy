@@ -1,0 +1,35 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "ROS2 YOLOv8 Detector",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/install/vision_module/lib/vision_module/yolo_detector_node",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [
+                {
+                    "name": "PATH",
+                    "value": "${workspaceFolder}/install/vision_module/lib:${env:PATH}"
+                },
+                {
+                    "name": "LD_LIBRARY_PATH",
+                    "value": "${workspaceFolder}/install/vision_module/lib:${env:LD_LIBRARY_PATH}"
+                }
+            ],
+            "externalConsole": true,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "ROS2: Build Current Package",
+            "miDebuggerPath": "/usr/bin/gdb"
+        }
+    ]
+}

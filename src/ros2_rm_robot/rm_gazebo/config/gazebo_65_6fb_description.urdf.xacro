@@ -1,0 +1,212 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="rm_65_description">
+
+    <!-- Used for fixing robot to Gazebo 'base_link' 将机械手的基座固定在世界坐标上-->
+    <!-- 定义一个名为"world"的虚拟连杆，作为机器人世界的参考系 -->
+    <link name="world"/>
+    <!-- 定义一个固定关节，将机器人的基座（base_link）固定到世界连杆上 -->
+    <!-- 这确保了机器人在Gazebo仿真中不会自由浮动，而是有一个固定的起点 -->
+    <joint name="fixed" type="fixed">
+        <parent link="world"/>
+        <child link="base_link"/>
+        <origin xyz=" 0 0 0" rpy="0 0 0"/>
+
+    </joint>
+
+    <!-- Import claw_description urdf file -->
+    <!-- 定义一个xacro属性link6_type，其值来自外部传入的同名参数 -->
+    <!-- 这允许在启动时动态选择不同的第六轴或末端执行器配置 -->
+    <xacro:property name="link6_type" value="$(arg link6_type)" />
+    <!-- 包含主机械臂的Gazebo URDF XACRO文件 -->
+    <!-- 通过link6_type参数，将外部传入的link6_type值传递给被包含的文件，实现模块化配置 -->
+    <xacro:include filename="$(find rm_description)/urdf/rm_65_gazebo.urdf.xacro" >
+        link6_type:=$(arg link6_type)
+    </xacro:include>
+   <!-- Import and attach gripper -->
+    <xacro:include filename="$(find rm_description)/urdf/gripper/rm_gripper.xacro" />
+    <xacro:rm_gripper parent="Link6">
+        <origin xyz="0 0 0.025" rpy="0 0 0" />
+    </xacro:rm_gripper>
+
+    <!-- 对一些link进行gazebo的属性设置 -->
+    <!-- 以下<gazebo>标签用于为Gazebo仿真中的特定连杆（link）设置物理属性 -->
+    <!-- <self_collide>false</self_collide>：禁用连杆自身的碰撞检测，可以提高仿真效率 -->
+    <!-- <gravity>false</gravity>：禁用重力对该连杆的影响，通常用于基座或不需要受重力影响的连杆 -->
+    <gazebo reference="base_link">
+        <self_collide>false</self_collide>
+        <gravity>false</gravity>
+    </gazebo>
+    <gazebo reference="link1">
+        <material>Gazebo/Purple</material> <!-- 设置连杆的材质颜色，用于Gazebo中的可视化 -->
+        <self_collide>false</self_collide>
+        <gravity>false</gravity>
+    </gazebo>
+    <gazebo reference="link2">
+        <material>Gazebo/Red</material>
+        <gravity>false</gravity>
+    </gazebo>
+    <gazebo reference="link3">
+        <material>Gazebo/Blue</material>
+        <gravity>false</gravity>
+    </gazebo>
+    <gazebo reference="link4">
+        <material>Gazebo/Green</material>
+        <gravity>false</gravity>
+    </gazebo>
+    <gazebo reference="link5">
+        <material>Gazebo/Yellow</material>
+        <gravity>false</gravity>
+    </gazebo>
+    <gazebo reference="link6">
+        <material>Gazebo/Orange</material>
+        <gravity>false</gravity>
+    </gazebo>
+    <gazebo reference="gripper_base_link">
+        <material>Gazebo/Gray</material>
+        <gravity>false</gravity>
+    </gazebo>
+    <gazebo reference="left_finger">
+        <material>Gazebo/Black</material>
+        <gravity>false</gravity>
+    </gazebo>
+    <gazebo reference="right_finger">
+        <material>Gazebo/Black</material>
+        <gravity>false</gravity>
+    </gazebo>
+    <!-- <gazebo reference="force_sensor_link">
+        <material>Gazebo/Orange</material>
+        <gravity>false</gravity>
+    </gazebo> -->
+
+    <!-- 全局Gazebo设置，这里设置了默认的碰撞检测为true -->
+    <gazebo>
+        <self_collide>true</self_collide>
+    </gazebo>
+
+    <!-- 声明ros2_control -->
+    <!-- <ros2_control>标签定义了机器人的硬件接口，用于与ROS控制器进行交互 -->
+    <!-- name="GazeboSystem" type="system"：定义了一个名为GazeboSystem的硬件系统接口 -->
+    <ros2_control name="GazeboSystem" type="system">
+        <hardware>
+            <!-- <plugin>gazebo_ros2_control/GazeboSystem</plugin>：指定使用Gazebo的ros2_control插件作为硬件接口 -->
+            <!-- 这个插件负责在Gazebo仿真中模拟机器人的关节行为 -->
+            <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+        </hardware>
+        <!-- 为每个关节定义命令接口和状态接口 -->
+        <!-- <command_interface name="position"/>：允许ROS控制器发送位置命令给该关节 -->
+        <!-- <state_interface name="position"/>：允许ROS控制器读取该关节的当前位置 -->
+        <!-- <param name="initial_value">0</param>：设置关节的初始位置为0 -->
+        <!-- <state_interface name="velocity"/>：允许ROS控制器读取该关节的当前速度 -->
+        <joint name="joint1">
+            <command_interface name="position"/>
+            <state_interface name="position">
+                <param name="initial_value">0</param>
+            </state_interface>
+            <state_interface name="velocity"/>
+        </joint>
+        <joint name="joint2">
+            <command_interface name="position"/>
+            <state_interface name="position">
+                <param name="initial_value">0</param>
+            </state_interface>
+            <state_interface name="velocity"/>
+        </joint>
+        <joint name="joint3">
+            <command_interface name="position"/>
+            <state_interface name="position">
+                <param name="initial_value">0</param>
+            </state_interface>
+            <state_interface name="velocity"/>
+        </joint>
+        <joint name="joint4">
+            <command_interface name="position"/>
+            <state_interface name="position">
+                <param name="initial_value">0</param>
+            </state_interface>
+            <state_interface name="velocity"/>
+        </joint>
+        <joint name="joint5">
+            <command_interface name="position"/>
+            <state_interface name="position">
+                <param name="initial_value">0</param>
+            </state_interface>
+            <state_interface name="velocity"/>
+        </joint>
+        <joint name="joint6">
+            <command_interface name="position"/>
+            <state_interface name="position">
+                <param name="initial_value">0</param>
+            </state_interface>
+            <state_interface name="velocity"/>
+        </joint>
+        <joint name="gripper_base_joint">
+            <command_interface name="position"/>
+            <state_interface name="position">
+                <param name="initial_value">0</param>
+            </state_interface>
+            <state_interface name="velocity"/>
+        </joint>
+        <joint name="left_finger_joint">
+            <command_interface name="position"/>
+            <state_interface name="position">
+                <param name="initial_value">0</param>
+            </state_interface>
+            <state_interface name="velocity"/>
+        </joint>
+
+        <!-- 为连接力传感器的关节定义状态接口 -->
+        <!-- <joint name="link6_to_force_sensor">
+            <state_interface name="position">
+                <param name="initial_value">0</param>
+            </state_interface>
+            <state_interface name="velocity"/>       
+        </joint> -->
+        <!-- 定义一个力/扭矩传感器 -->
+        <!-- <sensor name="ft_sensor" type="force_torque">：定义一个名为ft_sensor的力/扭矩传感器 -->
+        <!-- <parent link="force_sensor_link"/>：指定传感器所连接的连杆 -->
+        <!-- <state_interface>：定义传感器输出的数据接口，包括力（x,y,z）和扭矩（x,y,z） -->
+        <!-- <calibration matrix="...">：校准矩阵，这里是一个单位矩阵，表示没有校准 -->
+        <!-- <frame_id>force_sensor_link</frame_id>：传感器数据的参考坐标系 -->
+        <!-- <topic>~/wrench</topic>：传感器数据发布的ROS话题名称 -->
+        <!-- <sensor name="ft_sensor" >
+            <parent link="force_sensor_link"/> 
+            <state_interface name="force.x" />
+            <state_interface name="force.y" />
+            <state_interface name="force.z" />
+            <state_interface name="torque.x" />
+            <state_interface name="torque.y" />
+            <state_interface name="torque.z" />
+            <calibration matrix="[1,0,0,0,0,0;0,1,0,0,0,0;0,0,1,0,0,0;0,0,0,1,0,0;0,0,0,0,1,0;0,0,0,0,0,1]"/>
+            <frame_id>force_sensor_link</frame_id>
+            <topic>~/wrench</topic>
+        </sensor> -->
+    
+    </ros2_control>
+    <!-- Gazebo中力/扭矩传感器的具体配置 -->
+    <!-- <gazebo reference="link6_to_force_sensor">
+        <provideFeedback>true</provideFeedback> 
+        <disableFixedJointLumping>true</disableFixedJointLumping> 
+        <sensor name="ft_sensor" type="force_torque">
+            <always_on>true</always_on> 
+            <update_rate>100</update_rate> 
+            <force_torque>
+                <frame>force_sensor_link</frame> 
+                <measure_direction>child_to_parent</measure_direction> 
+            </force_torque>
+        </sensor>
+    </gazebo>   -->
+
+     <!-- 对一些link进行gazebo的属性设置 -->
+
+    <!-- 加载ros2_control插件 -->
+    <!-- 这是一个全局的<gazebo>标签，用于加载Gazebo的ROS 2控制插件 -->
+    <gazebo>
+        <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+            <!-- <parameters>：指定ROS 2控制器配置文件的路径 -->
+            <!-- 这个YAML文件包含了ROS 2控制器（如关节位置控制器、关节轨迹控制器等）的详细配置 -->
+            <parameters>$(find rm_gripper_config)/config/ros2_controllers.yaml</parameters>
+            <!-- <robot_param>robot_description</robot_param>：指定机器人URDF描述的ROS参数名称 -->
+            <!-- <robot_param_node>robot_state_publisher</robot_param_node>：指定发布机器人状态的节点名称 -->
+        </plugin>
+    </gazebo>
+</robot>

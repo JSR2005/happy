@@ -1,0 +1,8 @@
+gazebo仿真模型：gazebo_65_6f_demo.launch.py:gazebo_65_6fb_description.urdf.xacro（包含了机械臂模型的文件，gazebo的连杆声明，ros2control的配置插件，对关节的ros2control的硬件接口声明，如果有传感器等加入gazebo插件和声明）
+moveit2文件配置：gazebo_moveit_demo_6f.launch.py:由于是统一配置moveit_config，里边包含文件比较杂乱，有很多模型xacro文件   moveit_config = (
+        MoveItConfigsBuilder("rm_65_description", package_name="rm_65_config")
+        .robot_description(file_path="config/rm_65_6fb_description.urdf.xacro", mappings={"link6_type": "Link6_6fb"})
+        .to_moveit_configs()
+在robot_description中:声明了模型文件以及ros2control的初始位置
+实物机器：了解了机械臂的模型就是link6=link6-6fb
+然后接下来做一下单臂配上机械爪和连接盘的配置

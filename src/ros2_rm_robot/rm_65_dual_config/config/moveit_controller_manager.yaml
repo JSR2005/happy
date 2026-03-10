@@ -1,0 +1,47 @@
+# 必须添加这一行（之前缺失）
+moveit_controller_manager: moveit_simple_controller_manager/MoveItSimpleControllerManager
+
+moveit_simple_controller_manager:
+  controller_names:
+    - arm1_controller
+    - arm2_controller
+    - arm1_gripper_controller
+    - arm2_gripper_controller
+
+  arm1_controller:
+    type: FollowJointTrajectory
+    action_ns: follow_joint_trajectory
+    default: true
+    joints:
+      - arm1_joint1
+      - arm1_joint2
+      - arm1_joint3
+      - arm1_joint4
+      - arm1_joint5
+      - arm1_joint6
+
+  arm2_controller:
+    type: FollowJointTrajectory
+    action_ns: follow_joint_trajectory
+    default: true
+    joints:
+      - arm2_joint1
+      - arm2_joint2
+      - arm2_joint3
+      - arm2_joint4
+      - arm2_joint5
+      - arm2_joint6
+
+  arm1_gripper_controller:
+    type: GripperCommand
+    action_ns: gripper_cmd
+    default: true
+    joints:
+      - arm1_4C2_Joint1
+
+  arm2_gripper_controller:
+    type: GripperCommand
+    action_ns: gripper_cmd
+    default: true
+    joints:
+      - arm2_4C2_Joint1

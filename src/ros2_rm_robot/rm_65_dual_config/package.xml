@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>rm_65_dual_config</name>
+  <version>0.0.0</version>
+  <description>MoveIt2配置包 for 带相机连接板的RM65双臂（Link6_6fb+EG2-4C2）</description>
+  <maintainer email="your_email@example.com">your_name</maintainer>
+  <license>Apache-2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <!-- 核心依赖 -->
+  <depend>moveit_ros_move_group</depend>
+  <depend>moveit_planners_ompl</depend>
+  <depend>moveit_visual_tools</depend>
+  <depend>rviz2</depend>
+  <depend>rm_description</depend>
+  <depend>joint_state_publisher</depend>
+  <depend>robot_state_publisher</depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="dual_rm_65">
+
+    <!-- 定义世界坐标系 -->
+    <link name="world" />
+
+    <!-- Import robot description -->
+    <xacro:include filename="$(find rm_description)/urdf/rm_65.urdf.xacro" />
+
+    <!-- arm1：右侧机械臂 -->
+    <xacro:rm_65_urdf 
+        prefix="arm1_"       
+        parent_link="world"     
+        link6_type="Link6_6fb"      
+        origin_xyz="0 0.5 0"    
+        origin_rpy="0 0 0"      
+    />
+
+    <!-- arm2：左侧机械臂 -->
+    <xacro:rm_65_urdf 
+        prefix="arm2_"          
+        parent_link="world"     
+        link6_type="Link6_6fb"      
+        origin_xyz="0 -0.5 0"  
+        origin_rpy="0 0 0"      
+    />
+
+</robot>

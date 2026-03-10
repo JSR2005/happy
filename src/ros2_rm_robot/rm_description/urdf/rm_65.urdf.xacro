@@ -1,0 +1,571 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot name="rm_65_description" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <!-- ============================================== -->
+  <!-- 顶层可调用宏：封装整个rm_65机械臂              -->
+  <!-- 参数说明：                                     -->
+  <!--   prefix: 命名前缀（用于双臂区分，如arm1_）    -->
+  <!--   parent_link: 父连杆（默认world）             -->
+  <!--   link6_type: Link6类型（默认Link6）           -->
+  <!--   origin_xyz: 基座相对于父连杆的位置偏移      -->
+  <!--   origin_rpy: 基座相对于父连杆的姿态偏移      -->
+  <!-- ============================================== -->
+  <xacro:macro name="rm_65_urdf" params="prefix parent_link:=world link6_type:=Link6 origin_xyz:='0 0 0' origin_rpy:='0 0 0'">
+    <!-- 移除循环定义的property，直接使用宏参数 -->
+
+    <!-- 基座关节：挂载到指定父连杆，使用上层传递的origin偏移 -->
+    <joint name="${prefix}base_joint" type="fixed">
+      <origin xyz="${origin_xyz}" rpy="${origin_rpy}" />
+      <parent link="${parent_link}" />
+      <child link="${prefix}base_link" />
+      <axis xyz="0 0 1" />
+    </joint>
+
+    <!-- base_link（添加前缀） -->
+    <link name="${prefix}base_link">
+      <inertial>
+        <origin
+          xyz="-0.000433277303987328 -3.54664423471128E-05 0.0599427668933796"
+          rpy="0 0 0" />
+        <mass
+          value="0.841070778135659" />
+        <inertia
+          ixx="0.0017261110801622"
+          ixy="2.52746264980217E-06"
+          ixz="-3.67690303614961E-05"
+          iyy="0.00170987405835604"
+          iyz="1.67996364994424E-06"
+          izz="0.000904023422915791" />
+      </inertial>
+      <visual>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://rm_description/meshes/rm_65_arm/base_link.STL" />
+        </geometry>
+        <material
+          name="">
+          <color
+            rgba="1 1 1 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://rm_description/meshes/rm_65_arm/base_link.STL" />
+        </geometry>
+      </collision>
+    </link>
+
+    <!-- Link1（添加前缀） -->
+    <link name="${prefix}Link1">
+      <inertial>
+        <origin
+          xyz="1.2226305431569E-08 0.0211079974844683 -0.0251854220842269"
+          rpy="0 0 0" />
+        <mass
+          value="0.593563443690403" />
+        <inertia
+          ixx="0.00126614120341847"
+          ixy="0.0"  
+          ixz="-9.80120923066996E-09"
+          iyy="0.00118168178300364"
+          iyz="-0.00021121727444415"
+          izz="0.00056135241627747" />
+      </inertial>
+      <visual>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://rm_description/meshes/rm_65_arm/link1.STL" />
+        </geometry>
+        <material
+          name="">
+          <color
+            rgba="1 1 1 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://rm_description/meshes/rm_65_arm/link1.STL" />
+        </geometry>
+      </collision>
+    </link>
+
+    <!-- joint1（添加前缀） -->
+    <joint name="${prefix}joint1" type="revolute">
+      <origin
+        xyz="0 0 0.2405"
+        rpy="0 0 0" />
+      <parent link="${prefix}base_link" />
+      <child link="${prefix}Link1" />
+      <axis xyz="0 0 1" />
+      <limit
+        lower="-3.1"
+        upper="3.1"
+        effort="60"
+        velocity="3.14" />
+    </joint>
+
+    <!-- Link2（添加前缀） -->
+    <link name="${prefix}Link2">
+      <inertial>
+        <origin
+          xyz="0.152256463426163 4.75383656106654E-07 -0.00620260383607792"
+          rpy="0 0 0" />
+        <mass
+          value="0.864175046869043" />
+        <inertia
+          ixx="0.00089150298478414"
+          ixy="-2.23268489334765E-08"
+          ixz="0.00156246461035015"
+          iyy="0.00733754343083901"
+          iyz="6.28110889329165E-09"
+          izz="0.00697869103915473" />
+      </inertial>
+      <visual>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://rm_description/meshes/rm_65_arm/link2.STL" />
+        </geometry>
+        <material
+          name="">
+          <color
+            rgba="1 1 1 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://rm_description/meshes/rm_65_arm/link2.STL" />
+        </geometry>
+      </collision>
+    </link>
+
+    <!-- joint2（添加前缀） -->
+    <joint name="${prefix}joint2" type="revolute">
+      <origin
+        xyz="0 0 0"
+        rpy="1.5708 -1.5708 0" />
+      <parent link="${prefix}Link1" />
+      <child link="${prefix}Link2" />
+      <axis xyz="0 0 1" />
+      <limit
+        lower="-2.268"
+        upper="2.268"
+        effort="60"
+        velocity="3.14" />
+    </joint>
+
+    <!-- Link3（添加前缀） -->
+    <link name="${prefix}Link3">
+      <inertial>
+        <origin
+          xyz="5.05312670989961E-06 -0.0595925663694732 0.010569069212336"
+          rpy="0 0 0" />
+        <mass
+          value="0.289633681624654" />
+        <inertia
+          ixx="0.00063737100450158"
+          ixy="-7.05261293649751E-08"
+          ixz="-3.86643272239426E-08"
+          iyy="0.00015648388095025"
+          iyz="-0.00014461035994916"
+          izz="0.000614178164773085" />
+      </inertial>
+      <visual>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://rm_description/meshes/rm_65_arm/link3.STL" />
+        </geometry>
+        <material
+          name="">
+          <color
+            rgba="1 1 1 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://rm_description/meshes/rm_65_arm/link3.STL" />
+        </geometry>
+      </collision>
+    </link>
+
+    <!-- joint3（添加前缀） -->
+    <joint name="${prefix}joint3" type="revolute">
+      <origin
+        xyz="0.256 0 0"
+        rpy="0 0 1.5708" />
+      <parent link="${prefix}Link2" />
+      <child link="${prefix}Link3" />
+      <axis xyz="0 0 1" />
+      <limit
+        lower="-2.355"
+        upper="2.355"
+        effort="30"
+        velocity="3.92" />
+    </joint>
+
+    <!-- Link4（添加前缀） -->
+    <link name="${prefix}Link4">
+      <inertial>
+        <origin
+          xyz="1.15516617405898E-06 -0.0180424468598241 -0.0215394748352687"
+          rpy="0 0 0" />
+        <mass
+          value="0.239419768320061" />
+        <inertia
+          ixx="0.000285938919722783"
+          ixy="3.07101359163101E-09"
+          ixz="-2.21994118981953E-09"
+          iyy="0.000262727540304212"
+          iyz="4.4236583260078E-05"
+          izz="0.000119888082791859" />
+      </inertial>
+      <visual>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://rm_description/meshes/rm_65_arm/link4.STL" />
+        </geometry>
+        <material
+          name="">
+          <color
+            rgba="1 1 1 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://rm_description/meshes/rm_65_arm/link4.STL" />
+        </geometry>
+      </collision>
+    </link>
+
+    <!-- joint4（添加前缀） -->
+    <joint name="${prefix}joint4" type="revolute">
+      <origin
+        xyz="0 -0.21 0"
+        rpy="1.5708 0 0" />
+      <parent link="${prefix}Link3" />
+      <child link="${prefix}Link4" />
+      <axis xyz="0 0 1" />
+      <limit
+        lower="-3.1"
+        upper="3.1"
+        effort="10"
+        velocity="3.92" />
+    </joint>
+
+    <!-- Link5（添加前缀） -->
+    <link name="${prefix}Link5">
+      <inertial>
+        <origin
+          xyz="3.19794786262152E-06 -0.0593808368101458 0.00736804250989326"
+          rpy="0 0 0" />
+        <mass
+          value="0.218799761431678" />
+        <inertia
+          ixx="0.000350540363914072"
+          ixy="-3.41781619975602E-08"
+          ixz="-1.77056457224373E-08"
+          iyy="0.000104927867487581"
+          iyz="-7.82431228461971E-05"
+          izz="0.000334482418423629" />
+      </inertial>
+      <visual>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://rm_description/meshes/rm_65_arm/link5.STL" />
+        </geometry>
+        <material
+          name="">
+          <color
+            rgba="1 1 1 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://rm_description/meshes/rm_65_arm/link5.STL" />
+        </geometry>
+      </collision>
+    </link>
+
+    <!-- joint5（添加前缀） -->
+    <joint name="${prefix}joint5" type="revolute">
+      <origin
+        xyz="0 0 0"
+        rpy="-1.5708 0 0" />
+      <parent link="${prefix}Link4" />
+      <child link="${prefix}Link5" />
+      <axis xyz="0 0 1" />
+      <limit
+        lower="-2.233"
+        upper="2.233"
+        effort="10"
+        velocity="3.92" />
+    </joint>
+
+    <!-- Link6（添加前缀） -->
+    <xacro:if value="${ link6_type =='Link6' }">
+      <link name="${prefix}Link6">
+        <inertial>
+          <origin
+            xyz="0.000714234511756999 -0.000396718732824521 -0.0126723660946126"
+            rpy="0 0 0" />
+          <mass
+            value="0.0649018034311231" />
+          <inertia
+            ixx="2.02766547502765E-05"
+            ixy="-1.32505200276849E-06"
+            ixz="-2.5845091522508E-08"
+            iyy="1.87986725225022E-05"
+            iyz="3.39471452125439E-09"
+            izz="3.17885459163081E-05" />
+        </inertial>
+        <visual>
+          <origin
+            xyz="0 0 0"
+            rpy="0 0 0" />
+          <geometry>
+            <mesh
+              filename="package://rm_description/meshes/rm_65_arm/link6.STL" />
+          </geometry>
+          <material
+            name="">
+            <color
+              rgba="1 1 1 1" />
+          </material>
+        </visual>
+        <collision>
+          <origin
+            xyz="0 0 0"
+            rpy="0 0 0" />
+          <geometry>
+            <mesh
+              filename="package://rm_description/meshes/rm_65_arm/link6.STL" />
+          </geometry>
+        </collision>
+      </link>
+      <joint name="${prefix}joint6" type="revolute">
+        <origin
+          xyz="0 -0.144 0"
+          rpy="1.5708 0 0" />
+        <parent link="${prefix}Link5" />
+        <child link="${prefix}Link6" />
+        <axis xyz="0 0 1" />
+        <limit
+          lower="-6.28"
+          upper="6.28"
+          effort="10"
+          velocity="3.92" />
+      </joint>
+    </xacro:if>
+
+    <xacro:if value="${ link6_type =='Link6_6f' }">
+      <link name="${prefix}Link6">
+        <inertial>
+          <origin
+            xyz="0.00032231 -0.00017819 -0.028676"
+            rpy="0 0 0" />
+          <mass
+            value="0.14433" />
+          <inertia
+            ixx="3.6119E-05"
+            ixy="-1.3242E-06"
+            ixz="-3.2733E-08"
+            iyy="3.4626E-05"
+            iyz="7.6661E-09"
+            izz="6.1463E-05" />
+        </inertial>
+        <visual>
+          <origin
+            xyz="0 0 0"
+            rpy="0 0 0" />
+          <geometry>
+            <mesh
+              filename="package://rm_description/meshes/rm_65_arm/link6_6f.STL" />
+          </geometry>
+          <material
+            name="">
+            <color
+              rgba="1 1 1 1" />
+          </material>
+        </visual>
+        <collision>
+          <origin
+            xyz="0 0 0"
+            rpy="0 0 0" />
+          <geometry>
+            <mesh
+              filename="package://rm_description/meshes/rm_65_arm/link6_6f.STL" />
+          </geometry>
+        </collision>
+      </link>
+      <joint name="${prefix}joint6" type="revolute">
+        <origin
+          xyz="0 -0.1725 0"
+          rpy="1.5708 0 0" />
+        <parent link="${prefix}Link5" />
+        <child link="${prefix}Link6" />
+        <axis xyz="0 0 1" />
+        <limit
+          lower="-6.283"
+          upper="6.283"
+          effort="100"
+          velocity="1" />
+      </joint>
+    </xacro:if>
+
+    <xacro:if value="${ link6_type =='Link6_6fb' }">
+      <link name="${prefix}Link6">
+        <inertial>
+          <origin
+            xyz="0.000138559985614397 -0.00574537418929974 -0.535986173384404"
+            rpy="0 0 0" />
+          <mass
+            value="3.04449097371379" />
+          <inertia
+            ixx="0.170810328289537"
+            ixy="5.3822775672348E-07"
+            ixz="0.000151207460728544"
+            iyy="0.169967421523245"
+            iyz="0.00105777172655597"
+            izz="0.00305546066386606" />
+        </inertial>
+        <visual>
+          <origin
+            xyz="0 0 0"
+            rpy="0 0 0" />
+          <geometry>
+            <mesh
+              filename="package://rm_description/meshes/rm_65_arm/link6_6fb.STL" />
+          </geometry>
+          <material
+            name="">
+            <color
+              rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+          </material>
+        </visual>
+        <collision>
+          <origin
+            xyz="0 0 0"
+            rpy="0 0 0" />
+          <geometry>
+            <mesh
+              filename="package://rm_description/meshes/rm_65_arm/link6_6fb.STL" />
+          </geometry>
+        </collision>
+      </link>
+      <joint name="${prefix}joint6" type="revolute">
+        <origin
+          xyz="0 -0.1613 0"
+          rpy="1.5708 0 0" />
+        <parent link="${prefix}Link5" />
+        <child link="${prefix}Link6" />
+        <axis xyz="0 0 1" />
+        <limit
+          lower="-6.28"
+          upper="6.28"
+          effort="10"
+          velocity="3.14" />
+      </joint>
+    </xacro:if>
+
+    <!-- 连接板（添加前缀） -->
+    <link name="${prefix}fixed_plate_link">
+      <inertial>
+        <origin
+          xyz="0.045819 6.3593000000024774E-09 0.0040461"
+          rpy="0 0 0" />
+        <mass
+          value="0.13853" />
+        <inertia
+          ixx="4.2971E-05"
+          ixy="-4.08909999999764E-11"
+          ixz="-3.8593E-07"
+          iyy="0.00023364"
+          iyz="-1.36420000025386E-11"
+          izz="0.0002751" />
+      </inertial>
+      <visual>
+        <origin
+          xyz="-0.029 0.045 0"
+          rpy=" 0 0 -1.5707963267949" />
+        <geometry>
+          <mesh filename="package://rm_description/meshes/CameraConnectionPlate.STL" scale="0.001 0.001 0.001" />
+        </geometry>
+        <material name="gray">
+          <color rgba="0.5 0.5 0.5 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin
+          xyz="-0.029 0.045 0"
+          rpy=" 0 0 -1.5707963267949" />
+        <geometry>
+          <mesh filename="package://rm_description/meshes/CameraConnectionPlate.STL" scale="0.001 0.001 0.001" />
+        </geometry>
+      </collision>
+    </link>
+
+    <!-- 连接板关节（添加前缀） -->
+    <joint name="${prefix}fixed_plate" type="fixed">
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 3.141592653589793" />
+      <parent link="${prefix}Link6" />
+      <child link="${prefix}fixed_plate_link" />
+      <axis xyz="0 0 1" />
+    </joint>
+
+    <!-- 包含机械爪XACRO文件 -->
+    <xacro:include filename="$(find rm_description)/urdf/gripper.urdf.xacro" />
+    
+    <!-- 装配机械爪（传递前缀） -->
+    <xacro:attach_gripper_to_plate 
+      prefix="${prefix}"
+      parent_link="${prefix}fixed_plate_link" 
+      xyz_offset="0 0 0"  
+      rpy_offset="0 0 -1.5707963267949"     
+     />
+  </xacro:macro>
+  <!-- ============================================== -->
+  <!-- 宏定义结束                                      -->
+  <!-- ============================================== -->
+</robot>

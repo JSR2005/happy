@@ -1,0 +1,61 @@
+{
+    "cmake.sourceDirectory": "/home/jsr/ros2_ws/build/rm_ros_interfaces/rm_ros_interfaces__py",
+    "C_Cpp.intelliSenseEngine": "default",
+    "C_Cpp.intelliSenseEngineFallback": "enabled",
+    "[cpp]": {
+        "editor.defaultFormatter": "ms-vscode.cpptools",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.fixAll": "explicit"
+        }
+    },
+    "[c]": {
+        "editor.defaultFormatter": "ms-vscode.cpptools",
+        "editor.formatOnSave": true
+    },
+    "C_Cpp.default.includePath": [
+        "${workspaceFolder}/**",
+        "${workspaceFolder}/src/ros2_rm_robot/vision_module/include",
+        "${workspaceFolder}/install/vision_module/include",
+        "${workspaceFolder}/install/vision_interfaces/include",
+        "/opt/ros/humble/include/**",
+        "/usr/include/opencv4",
+        "/usr/include/c++/11",
+        "/usr/include/x86_64-linux-gnu",
+        "/usr/include"
+    ],
+    "C_Cpp.default.defines": [
+        "_DEFAULT_SOURCE",
+        "__cplusplus=201703"
+    ],
+    "C_Cpp.default.compilerPath": "/usr/bin/g++",
+    "C_Cpp.default.cppStandard": "c++17",
+    "C_Cpp.default.cStandard": "c17",
+    "C_Cpp.clang_format_style": "Google",
+    "files.exclude": {
+        "**/build": false,
+        "**/install": false,
+        "**/.venv": true
+    },
+    "search.exclude": {
+        "**/build": false,
+        "**/install": false,
+        "**/.venv": true
+    },
+    "editor.formatOnSave": true,
+    "editor.rulers": [
+        80,
+        120
+    ],
+    "editor.wordWrap": "on",
+    "python.defaultInterpreterPath": "/usr/bin/python3",
+    "python.analysis.extraPaths": [
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/home/jsr/ros2_ws/install/lib/python3.10/site-packages"
+    ],
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.python",
+        "editor.formatOnSave": true
+    },
+    "C_Cpp.errorSquiggles": "disabled"
+}
